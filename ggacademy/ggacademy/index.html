@@ -1,13 +1,81 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>GGAcademy - Aprimore seu Jogo</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+        color: #f3f3f3;
+        min-height: 100vh;
+      }
+      header {
+        background: #181920;
+        padding: 1.5rem 0;
+        text-align: center;
+        box-shadow: 0 2px 8px #0002;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+      nav {
+        margin: 2rem 0 1.5rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .btn {
+        background: #3b82f6;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px #0002;
+      }
+      .btn:hover {
+        background: #2563eb;
+      }
+      main {
+        max-width: 700px;
+        margin: 2rem auto;
+        background: #23272f;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 24px #0003;
+      }
+      footer {
+        text-align: center;
+        margin: 2rem 0 1rem 0;
+        color: #aaa;
+        font-size: 0.95rem;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <header>
+      <h1>GGAcademy</h1>
+      <p>Seu guia para evoluir no LoL, Valorant e Dota!</p>
+    </header>
+    <nav>
+      <button class="btn" onclick="window.location.href='#lol'">League of Legends</button>
+      <button class="btn" onclick="window.location.href='#valorant'">Valorant</button>
+      <button class="btn" onclick="window.location.href='#dota'">Dota 2</button>
+    </nav>
+    <main>
+      <div id="root"></div>
+    </main>
+    <footer>
+      &copy; 2025 GGAcademy. Todos os direitos reservados.
+    </footer>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
