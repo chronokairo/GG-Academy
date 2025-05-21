@@ -2,55 +2,189 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GGAcademy - Aprimore seu Jogo</title>
+    <title>GG Academy - Aprimore seu Jogo</title>
     <style>
       body {
         margin: 0;
-        font-family: 'Segoe UI', Arial, sans-serif;
+        font-family: Arial, sans-serif;
         background: linear-gradient(135deg, #232526 0%, #414345 100%);
         color: #f3f3f3;
         min-height: 100vh;
       }
       header {
         background: #181920;
-        padding: 1.5rem 0;
+        padding: 1.5rem 0 1rem 0;
         text-align: center;
         box-shadow: 0 2px 8px #0002;
+        position: relative;
       }
-      header h1 {
-        margin: 0;
-        font-size: 2.2rem;
-        letter-spacing: 2px;
+      .auth-box {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .auth-btn {
+        background: #23272f;
+        color: #fff;
+        border: 1px solid #3b82f6;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+      .auth-btn:hover {
+        background: #3b82f6;
       }
       nav {
         margin: 2rem 0 1.5rem 0;
         display: flex;
         justify-content: center;
-        gap: 1.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
       }
       .btn {
         background: #3b82f6;
         color: #fff;
         border: none;
-        padding: 0.75rem 1.5rem;
+        padding: 0.7rem 1.2rem;
         border-radius: 8px;
         font-size: 1rem;
         cursor: pointer;
-        transition: background 0.2s;
-        box-shadow: 0 2px 8px #0002;
       }
       .btn:hover {
         background: #2563eb;
       }
-      main {
-        max-width: 700px;
-        margin: 2rem auto;
+      .boards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+      .board-card {
+        background: #23272f;
+        border-radius: 10px;
+        box-shadow: 0 2px 12px #0003;
+        padding: 1rem 1.5rem;
+        min-width: 180px;
+        max-width: 220px;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.1s, box-shadow 0.1s;
+      }
+      .board-card:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 6px 24px #0004;
+        background: #232b3f;
+      }
+      .board-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: #3b82f6;
+      }
+      .charts-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      .chart-block {
         background: #23272f;
         border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 24px #0003;
+        padding: 1.5rem 2rem;
+        min-width: 260px;
+        max-width: 340px;
+        width: 100%;
+        box-shadow: 0 2px 12px #0003;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: box-shadow 0.3s, border 0.3s;
+        /* Adiciona transição para animação */
+      }
+      .chart-block.highlight {
+        box-shadow: 0 0 0 4px #3b82f6, 0 2px 12px #0003;
+        border: 2px solid #3b82f6;
+        animation: highlightFade 1.2s forwards;
+      }
+      @keyframes highlightFade {
+        0%   { box-shadow: 0 0 0 8px #3b82f6, 0 2px 12px #0003; border-color: #3b82f6; }
+        70%  { box-shadow: 0 0 0 4px #3b82f6, 0 2px 12px #0003; border-color: #3b82f6; }
+        100% { box-shadow: 0 2px 12px #0003; border-color: transparent; }
+      }
+      .chart-block-title {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        color: #3b82f6;
+        font-size: 1.1rem;
+      }
+      .login-modal-bg {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #0008;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .login-modal {
+        background: #23272f;
+        border-radius: 10px;
+        box-shadow: 0 4px 24px #0008;
+        padding: 1.5rem 2rem;
+        min-width: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative;
+      }
+      .login-modal h2 {
+        margin: 0 0 0.5rem 0;
+        color: #3b82f6;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .login-modal label {
+        font-size: 1rem;
+        color: #f3f3f3;
+        margin-bottom: 0.2rem;
+      }
+      .login-modal input {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: 1px solid #3b82f6;
+        background: #181920;
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .login-modal .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+      }
+      .login-modal .modal-btn {
+        background: #3b82f6;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+      .login-modal .close-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: #aaa;
+        font-size: 1.3rem;
+        cursor: pointer;
       }
       footer {
         text-align: center;
@@ -62,20 +196,180 @@
   </head>
   <body>
     <header>
-      <h1>GGAcademy</h1>
+      <div class="auth-box">
+        <button class="auth-btn" id="loginBtn">Login</button>
+        <button class="auth-btn">Sign Up</button>
+      </div>
+      <h1>GG Academy</h1>
       <p>Seu guia para evoluir no LoL, Valorant e Dota!</p>
     </header>
     <nav>
-      <button class="btn" onclick="window.location.href='#lol'">League of Legends</button>
-      <button class="btn" onclick="window.location.href='#valorant'">Valorant</button>
-      <button class="btn" onclick="window.location.href='#dota'">Dota 2</button>
+      <button class="btn">League of Legends</button>
+      <button class="btn">Valorant</button>
+      <button class="btn">Dota 2</button>
+      <button class="btn">CS:GO</button>
+      <button class="btn">Overwatch</button>
+      <button class="btn">Fortnite</button>
     </nav>
     <main>
-      <div id="root"></div>
+      <div class="boards">
+        <div class="board-card" onclick="scrollToChart(0)">
+          <div class="board-title">League of Legends</div>
+        </div>
+        <div class="board-card" onclick="scrollToChart(1)">
+          <div class="board-title">Valorant</div>
+        </div>
+        <div class="board-card" onclick="scrollToChart(2)">
+          <div class="board-title">Dota 2</div>
+        </div>
+        <div class="board-card" onclick="scrollToChart(3)">
+          <div class="board-title">CS:GO</div>
+        </div>
+        <div class="board-card" onclick="scrollToChart(4)">
+          <div class="board-title">Overwatch</div>
+        </div>
+        <div class="board-card" onclick="scrollToChart(5)">
+          <div class="board-title">Fortnite</div>
+        </div>
+      </div>
+      <!-- Gráficos em vertical -->
+      <div class="charts-vertical" id="chartsVertical"></div>
     </main>
     <footer>
       &copy; 2025 GGAcademy. Todos os direitos reservados.
     </footer>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="loginModal" style="display:none;">
+      <div class="login-modal-bg">
+        <form class="login-modal" onsubmit="return false;">
+          <button class="close-btn" type="button" onclick="closeLoginModal()">&times;</button>
+          <h2>Login</h2>
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" placeholder="Digite seu e-mail" required />
+          <label for="login-password">Senha</label>
+          <input type="password" id="login-password" placeholder="Digite sua senha" required />
+          <div class="modal-actions">
+            <button class="modal-btn" type="submit">Entrar</button>
+            <button class="modal-btn" type="button" onclick="closeLoginModal()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Dados básicos para os gráficos
+      const chartData = [
+        {
+          title: "League of Legends",
+          type: "bar",
+          labels: ["Top", "Jungle", "Mid", "ADC", "Support"],
+          data: [22, 18, 25, 20, 15]
+        },
+        {
+          title: "Valorant",
+          type: "pie",
+          labels: ["Duelista", "Sentinela", "Controlador", "Iniciador"],
+          data: [35, 25, 20, 20]
+        },
+        {
+          title: "Dota 2",
+          type: "doughnut",
+          labels: ["Carry", "Mid", "Offlane", "Suporte"],
+          data: [30, 25, 20, 25]
+        },
+        {
+          title: "CS:GO",
+          type: "bar",
+          labels: ["Dust2", "Mirage", "Inferno", "Nuke", "Ancient"],
+          data: [28, 32, 18, 12, 10]
+        },
+        {
+          title: "Overwatch",
+          type: "pie",
+          labels: ["Tank", "DPS", "Suporte"],
+          data: [30, 45, 25]
+        },
+        {
+          title: "Fortnite",
+          type: "doughnut",
+          labels: ["Solo", "Dupla", "Squad"],
+          data: [40, 30, 30]
+        }
+      ];
+
+      // Renderiza todos os gráficos em vertical
+      function renderAllCharts() {
+        const chartsDiv = document.getElementById('chartsVertical');
+        chartsDiv.innerHTML = '';
+        chartData.forEach((chart, idx) => {
+          const chartBlock = document.createElement('div');
+          chartBlock.className = 'chart-block';
+          chartBlock.id = `chart-block-${idx}`;
+          chartBlock.innerHTML = `
+            <div class="chart-block-title">${chart.title}</div>
+            <canvas id="gameChart${idx}" width="220" height="180"></canvas>
+          `;
+          chartsDiv.appendChild(chartBlock);
+          const ctx = document.getElementById(`gameChart${idx}`).getContext('2d');
+          new Chart(ctx, {
+            type: chart.type,
+            data: {
+              labels: chart.labels,
+              datasets: [{
+                data: chart.data,
+                backgroundColor: [
+                  '#3b82f6', '#2563eb', '#60a5fa', '#818cf8', '#f59e42', '#f472b6'
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: false,
+              plugins: {
+                legend: { display: chart.type !== 'bar' }
+              }
+            }
+          });
+        });
+      }
+
+      // Scroll suave para o gráfico correspondente ao clicar no dashboard
+      function scrollToChart(idx) {
+        const el = document.getElementById(`chart-block-${idx}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Remove destaque anterior
+          document.querySelectorAll('.chart-block.highlight').forEach(e => e.classList.remove('highlight'));
+          // Adiciona destaque com animação
+          el.classList.add('highlight');
+          // Remove a classe highlight após a animação
+          setTimeout(() => {
+            el.classList.remove('highlight');
+          }, 1200);
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        renderAllCharts();
+      });
+
+      // Modal login
+      const loginBtn = document.getElementById('loginBtn');
+      const loginModal = document.getElementById('loginModal');
+      function openLoginModal() {
+        loginModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLoginModal() {
+        loginModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+      loginBtn.addEventListener('click', openLoginModal);
+      loginModal.addEventListener('click', function(e) {
+        if (e.target === loginModal) closeLoginModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLoginModal();
+      });
+    </script>
   </body>
 </html>
